@@ -1,7 +1,9 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env")
+
     app_name: str = "Soca"
     app_description: str = "Soca is an API wrapper for a CCTV NVR."
     rtsp_host: str = "localhost"
