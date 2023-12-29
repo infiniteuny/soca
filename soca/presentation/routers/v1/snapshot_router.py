@@ -1,0 +1,56 @@
+from typing import Annotated
+from fastapi import APIRouter, Depends
+from fastapi.responses import ORJSONResponse
+from config.settings import Settings
+from soca.application.snapshot_camera import SnapshotCamera
+from soca.injection import settings
+
+
+snapshot = APIRouter(
+    tags=["snapshot"],
+)
+
+
+@snapshot.get("/snapshots")
+def read_all(settings: Annotated[Settings, Depends(settings)]):
+    snapshots = []
+    for camera_id in settings.camera_ids:
+        snapshots.append({
+            'id': camera_id,
+            'url': f'/api/v1/snapshots/{camera_id}'
+        })
+
+    return ORJSONResponse(
+        content={
+            'status': 'success',
+            'data': {
+                'snapshots': snapshots
+            }
+        }
+    )
+
+
+@snapshot.get("/snapshots/{id}")
+def read(id: int, snashot_camera: Annotated[SnapshotCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
+    if id in settings.camera_ids:
+        image = snashot_camera(id)
+
+        return ORJSONResponse(
+            content={
+                'status': 'success',
+                'data': {
+                    'snapshot': {
+                        'id': id,
+                        'image': image,
+                    }
+                }
+            }
+        )
+    else:
+        return ORJSONResponse(
+            status_code=404,
+            content={
+                'status': 'error',
+                'message': 'Camera not found.'
+            }
+        )
