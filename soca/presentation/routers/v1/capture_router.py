@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi.responses import ORJSONResponse
-from config.settings import Settings
+from soca.config.settings import Settings
 from soca.application.capture_camera import CaptureCamera
 from soca.injection import settings
 

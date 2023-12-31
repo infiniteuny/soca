@@ -1,6 +1,6 @@
 from fastapi import Depends
 from typing import Annotated
-from config.settings import Settings
+from soca.config.settings import Settings
 from soca.domain.repositories.rtsp_repository_abc import RtspRepositoryABC
 from soca.infrastructure.datasources.rtsp_datasource import RtspDataSource
 

@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse, ORJSONResponse
-from config.settings import Settings
+from soca.config.settings import Settings
 from soca.injection import settings
 import os
 

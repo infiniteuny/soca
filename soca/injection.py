@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from config.settings import Settings
+from soca.config.settings import Settings
 
 
 @lru_cache

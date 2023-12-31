@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Annotated
 from fastapi import Depends
 from vidgear.gears import CamGear, StreamGear, WriteGear
-from config.settings import Settings
+from soca.config.settings import Settings
 from soca.injection import settings
 import os
 import time
