@@ -1,10 +1,11 @@
 from base64 import b64encode
 from datetime import datetime
-from typing import Annotated
 from fastapi import Depends
-from vidgear.gears import CamGear, StreamGear, WriteGear
 from soca.config.settings import Settings
 from soca.injection import settings
+from typing import Annotated
+from vidgear.gears import CamGear, StreamGear, WriteGear
+import cv2
 import os
 import time
 
@@ -126,42 +127,20 @@ class RtspDataSource:
         # Construct the RTSP URL
         self.__construct_rtsp_url(camera_id)
 
-        # Construct the output path
-        output_path = 'media/snapshots'
-        output_file = f'{output_path}/{camera_id}.jpg'
-
-        # Create ouput directory if it does not exist
-        if not os.path.exists(output_path):
-            os.makedirs(output_path)
-
         # Open the stream
         source = CamGear(source=self.rtsp_url).start()  # type: ignore
-
-        output_params = {
-            '-frames:v': 1,
-            '-f': 'image2',
-            '-c:v': 'mjpeg'
-        }
-
-        # Define writer with defined parameters and suitable output filename
-        writer = WriteGear(
-            output=output_file,
-            **output_params  # type: ignore
-        )
 
         # Read frames
         frame = source.read()
 
-        # Save the frame
-        writer.write(frame)
+        if frame is None:
+            raise Exception(f'Could not read frame from camera {camera_id}.')
+
+        # Encode the frame
+        _, image_array = cv2.imencode('.jpg', frame)
+        encoded_image = b64encode(image_array.tobytes())
 
         # Safely close video stream
         source.stop()
-
-        # Safely close writer
-        writer.close()
-
-        with open(output_file, 'rb') as image_file:
-            encoded_image = b64encode(image_file.read())
 
         return encoded_image.decode('utf-8')
