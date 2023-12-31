@@ -3,11 +3,11 @@ from datetime import datetime
 from fastapi import Depends
 from soca.config.settings import Settings
 from soca.injection import settings
+from time import time
 from typing import Annotated
 from vidgear.gears import CamGear, StreamGear, WriteGear
 import cv2
 import os
-import time
 
 
 class RtspDataSource:
@@ -29,7 +29,7 @@ class RtspDataSource:
         self.__construct_rtsp_url(camera_id)
 
         # Construct the output path
-        output_path = f'media/livestreams/{camera_id}'
+        output_path = f'media/streams/{camera_id}'
 
         # Create ouput directory if it does not exist
         if not os.path.exists(output_path):
@@ -59,22 +59,7 @@ class RtspDataSource:
             frame = source.read()
 
             if frame is None:
-                source.stop()
-                time.sleep(reset_delay)
-
-                print(
-                    '{} :: Reconnecting to camera {}'.format(
-                        datetime.now().strftime('%H:%M:%S'),
-                        str(camera_id),
-                    )
-                )
-
-                try:
-                    source = CamGear(
-                        source=self.rtsp_url  # type: ignore
-                    ).start()
-                except:
-                    continue
+                raise Exception(f'Could not read frame from camera {camera_id}.')
             else:
                 streamer.stream(frame)
 
@@ -104,7 +89,7 @@ class RtspDataSource:
             **output_params  # type: ignore
         )
 
-        end_time = time.time() + duration + 1
+        end_time = time() + duration + 1
         while time.time() < end_time:
             # Read frames
             frame = source.read()
