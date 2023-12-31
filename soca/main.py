@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from threading import Event
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from soca.application.stream_camera import StreamCamera
@@ -13,14 +14,25 @@ import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    streams: dict[int, StreamCamera] = {}
+    stop_events: dict[int, Event] = {}
     if settings().stream_enabled:
-        streams: dict[int, StreamCamera] = {}
         for camera_id in settings().camera_ids:
             rtsp_datasource = RtspDataSource(settings())
             rtsp_repository = RtspRepository(rtsp_datasource)
-            streams[camera_id] = StreamCamera(camera_id, rtsp_repository)
+            stop_events[camera_id] = Event()
+            streams[camera_id] = StreamCamera(
+                camera_id,
+                stop_events[camera_id],
+                rtsp_repository
+            )
             streams[camera_id].start()
     yield
+    if settings().stream_enabled:
+        for camera_id in settings().camera_ids:
+            stop_events[camera_id].set()
+        for camera_id in settings().camera_ids:
+            streams[camera_id].join()
 
 # Core application instance
 app = FastAPI(
