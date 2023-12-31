@@ -43,7 +43,13 @@ class RtspDataSource:
         stream_params = {
             '-input_framerate': source.framerate,
             '-livestream': True,
-            '-clear_prev_assets': True
+            '-clear_prev_assets': True,
+            '-preset': 'ultrafast',
+            '-tune': 'zerolatency',
+            '-hls_list_size': 3,
+            '-hls_delete_threshold': 12,
+            '-hls_init_time': 1,
+            '-hls_time': 5,
         }
 
         # Define streamer with manifest-file location and name, format, and
