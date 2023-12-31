@@ -75,11 +75,11 @@ def read(id: int, settings: Annotated[Settings, Depends(settings)]):
 @livestream.get("/livestreams/{id}/{filename}")
 def read_blob(id: int, filename: str, settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
-        static_file_path = f'media/livestreams/{id}'
-        if filename.endswith('.ts') and os.path.isfile(os.path.join(static_file_path, filename)):
-            return FileResponse(os.path.join(static_file_path, filename))
-        elif filename == 'index' and os.path.isfile(os.path.join(static_file_path, f'{filename}.m3u8')):
+        static_file_path = f'media/streams/{id}'
+        if filename == 'index' and os.path.isfile(os.path.join(static_file_path, f'{filename}.m3u8')):
             return FileResponse(os.path.join(static_file_path, f'{filename}.m3u8'))
+        elif filename.endswith('.ts') and os.path.isfile(os.path.join(static_file_path, filename)):
+            return FileResponse(os.path.join(static_file_path, filename))
         else:
             return ORJSONResponse(
                 status_code=404,
