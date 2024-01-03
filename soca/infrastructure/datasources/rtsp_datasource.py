@@ -1,5 +1,7 @@
 from base64 import b64encode
+from calendar import c
 from datetime import datetime
+from pathlib import Path
 from fastapi import Depends
 from soca.config.settings import Settings
 from soca.injection import settings
@@ -49,7 +51,7 @@ class RtspDataSource:
             '-hls_list_size': 3,
             '-hls_delete_threshold': 12,
             '-hls_init_time': 1,
-            '-hls_time': 5,
+            '-hls_time': 6,
         }
 
         # Define streamer with manifest-file location and name, format, and
@@ -65,51 +67,19 @@ class RtspDataSource:
             frame = source.read()
 
             if frame is None:
-                raise Exception(f'Could not read frame from camera {camera_id}.')
+                raise Exception(
+                    f'Could not read frame from camera {camera_id}.')
             else:
                 streamer.stream(frame)
 
     def capture(self, camera_id: int, duration: int = 5) -> str:
-        # Construct the RTSP URL
-        self.__construct_rtsp_url(camera_id)
-
-        # Construct the output path
-        output_path = 'media/captures'
-        output_file = f'{output_path}/{camera_id}.mp4'
-
-        # Create ouput directory if it does not exist
-        if not os.path.exists(output_path):
-            os.makedirs(output_path)
-
-        # Open the stream
-        source = CamGear(source=self.rtsp_url).start()  # type: ignore
-
-        output_params = {
-            '-input_framerate': source.framerate,
-            '-c:v': 'libx264',
-        }
-
-        # Define writer with defined parameters and suitable output filename
-        writer = WriteGear(
-            output=output_file,
-            **output_params  # type: ignore
+        # Construct the stream path
+        streams_path = f'media/streams/{camera_id}'
+        stream_file = max(Path(streams_path).glob(
+            "chunk-stream-*.ts"), key=os.path.getctime
         )
 
-        end_time = time() + duration + 1
-        while time.time() < end_time:
-            # Read frames
-            frame = source.read()
-
-            # Save the frame
-            writer.write(frame)
-
-        # Safely close video stream
-        source.stop()
-
-        # Safely close writer
-        writer.close()
-
-        with open(output_file, 'rb') as video_file:
+        with open(stream_file, 'rb') as video_file:
             encoded_video = b64encode(video_file.read())
 
         return encoded_video.decode('utf-8')

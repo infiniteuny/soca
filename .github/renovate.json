@@ -28,7 +28,7 @@
         "poetry",
         "dockerfile"
       ],
-      "matchPackageNames": [
+      "matchDepNames": [
         "python"
       ],
       "labels": [
