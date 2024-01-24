@@ -32,25 +32,34 @@ def read_all(settings: Annotated[Settings, Depends(settings)]):
 
 @snapshot.get("/snapshots/{id}")
 def read(id: str, snashot_camera: Annotated[SnapshotCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
-    if id in settings.camera_rtsps.keys():
-        image = snashot_camera(id)
+    try:
+        if id in settings.camera_rtsps.keys():
+            image = snashot_camera(id)
 
-        return ORJSONResponse(
-            content={
-                'status': 'success',
-                'data': {
-                    'snapshot': {
-                        'id': id,
-                        'image': image,
+            return ORJSONResponse(
+                content={
+                    'status': 'success',
+                    'data': {
+                        'snapshot': {
+                            'id': id,
+                            'image': image,
+                        }
                     }
                 }
-            }
-        )
-    else:
+            )
+        else:
+            return ORJSONResponse(
+                status_code=404,
+                content={
+                    'status': 'error',
+                    'message': 'Camera not found.'
+                }
+            )
+    except:
         return ORJSONResponse(
-            status_code=404,
+            status_code=500,
             content={
                 'status': 'error',
-                'message': 'Camera not found.'
+                'message': 'Internal server error.'
             }
         )
