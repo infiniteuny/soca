@@ -15,7 +15,7 @@ livestream = APIRouter(
 def read_all(settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
         livestreams = []
-        for camera_id in settings.camera_ids:
+        for camera_id, _ in settings.camera_rtsps.items():
             livestreams.append({
                 'id': camera_id,
                 'url': f'/api/v1/livestreams/{camera_id}/index'
@@ -40,9 +40,9 @@ def read_all(settings: Annotated[Settings, Depends(settings)]):
 
 
 @livestream.get("/livestreams/{id}")
-def read(id: int, settings: Annotated[Settings, Depends(settings)]):
+def read(id: str, settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
-        if id in settings.camera_ids:
+        if id in settings.camera_rtsps.keys():
             return ORJSONResponse(
                 content={
                     'status': 'success',

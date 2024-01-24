@@ -14,7 +14,7 @@ capture = APIRouter(
 @capture.get("/captures")
 def read_all(settings: Annotated[Settings, Depends(settings)]):
     captures = []
-    for camera_id in settings.camera_ids:
+    for camera_id in settings.camera_rtsps.keys():
         captures.append({
             'id': camera_id,
             'url': f'/api/v1/captures/{camera_id}'
@@ -31,8 +31,8 @@ def read_all(settings: Annotated[Settings, Depends(settings)]):
 
 
 @capture.get("/captures/{id}")
-def read(id: int, snashot_camera: Annotated[CaptureCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
-    if id in settings.camera_ids:
+def read(id: str, snashot_camera: Annotated[CaptureCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
+    if id in settings.camera_rtsps.keys():
         video = snashot_camera(id)
 
         return ORJSONResponse(

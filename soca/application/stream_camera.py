@@ -8,11 +8,11 @@ from typing import Annotated
 
 
 class StreamCamera(Thread):
-    id: int
+    id: str
     stop_event: Event
     rtsp_repository: RtspRepositoryABC
 
-    def __init__(self, id: int, stop_event: Event, rtsp_repository: Annotated[RtspRepository, Depends()]):
+    def __init__(self, id: str, stop_event: Event, rtsp_repository: Annotated[RtspRepository, Depends()]):
         Thread.__init__(self)
         self.id = id
         self.stop_event = stop_event

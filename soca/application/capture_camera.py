@@ -10,5 +10,5 @@ class CaptureCamera:
     def __init__(self, rtsp_repository: Annotated[RtspRepository, Depends()]):
         self.rtsp_repository = rtsp_repository
 
-    def __call__(self, camera_id: int) -> str:
+    def __call__(self, camera_id: str) -> str:
         return self.rtsp_repository.capture(camera_id)

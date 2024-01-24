@@ -11,20 +11,14 @@ import os
 
 
 class RtspDataSource:
-    __rtsp_base_url: str
-    rtsp_url: str
 
     def __init__(self, settings: Annotated[Settings, Depends(settings)]) -> None:
-        rtsp_host = settings.rtsp_host
-        rtsp_port = settings.rtsp_port
-        rtsp_username = settings.rtsp_username
-        rtsp_password = settings.rtsp_password
-        self.__rtsp_base_url = f'rtsp://{rtsp_username}:{rtsp_password}@{rtsp_host}:{rtsp_port}'
+        self.settings = settings
 
-    def __construct_rtsp_url(self, camera_id: int) -> None:
-        self.rtsp_url = f'{self.__rtsp_base_url}/mode=real&idc={camera_id}&ids=1'
+    def __construct_rtsp_url(self, camera_id: str) -> None:
+        self.rtsp_url = self.settings.camera_rtsps[camera_id]
 
-    def stream(self, camera_id: int, reset_delay: int = 5) -> None:
+    def stream(self, camera_id: str) -> None:
         # Construct the RTSP URL
         self.__construct_rtsp_url(camera_id)
 
@@ -65,11 +59,11 @@ class RtspDataSource:
             frame = source.read()
 
             if frame is None:
-                raise Exception(f'Could not read frame from camera {camera_id}.')
+                raise Exception(f'Could not read frame from camera ID {camera_id}.')
             else:
                 streamer.stream(frame)
 
-    def capture(self, camera_id: int, duration: int = 5) -> str:
+    def capture(self, camera_id: str, duration: int = 5) -> str:
         # Construct the RTSP URL
         self.__construct_rtsp_url(camera_id)
 
@@ -114,7 +108,7 @@ class RtspDataSource:
 
         return encoded_video.decode('utf-8')
 
-    def snapshot(self, camera_id: int) -> str:
+    def snapshot(self, camera_id: str) -> str:
         # Construct the RTSP URL
         self.__construct_rtsp_url(camera_id)
 
@@ -125,7 +119,7 @@ class RtspDataSource:
         frame = source.read()
 
         if frame is None:
-            raise Exception(f'Could not read frame from camera {camera_id}.')
+            raise Exception(f'Could not read frame from camera ID {camera_id}.')
 
         # Encode the frame
         _, image_array = cv2.imencode('.jpg', frame)

@@ -11,11 +11,11 @@ class RtspRepository(RtspRepositoryABC):
     def __init__(self, rtsp_datasource: Annotated[RtspDataSource, Depends()]):
         self.rtsp_datasource = rtsp_datasource
 
-    def stream(self, camera_id: int) -> None:
+    def stream(self, camera_id: str) -> None:
         self.rtsp_datasource.stream(camera_id)
 
-    def capture(self, camera_id: int, duration: int = 5) -> str:
+    def capture(self, camera_id: str, duration: int = 5) -> str:
         return self.rtsp_datasource.capture(camera_id, duration)
 
-    def snapshot(self, camera_id: int) -> str:
+    def snapshot(self, camera_id: str) -> str:
         return self.rtsp_datasource.snapshot(camera_id)
