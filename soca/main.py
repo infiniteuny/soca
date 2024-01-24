@@ -51,6 +51,18 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
+
+@app.exception_handler(404)
+async def custom_404_handler(_, __):
+    return ORJSONResponse(
+        status_code=404,
+        content={
+            'status': 'error',
+            'message': 'Not found.'
+        }
+    )
+
+
 # API router
 api = APIRouter(
     prefix='/api',
