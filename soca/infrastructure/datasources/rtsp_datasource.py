@@ -23,7 +23,9 @@ class RtspDataSource:
         self.__construct_rtsp_url(camera_id)
 
         # Construct the output path
-        output_path = f'media/streams/{camera_id}'
+        output_path = os.path.join(
+            self.settings.app_temp_dir, 'streams', camera_id
+        )
 
         # Create ouput directory if it does not exist
         if not os.path.exists(output_path):
@@ -59,7 +61,8 @@ class RtspDataSource:
             frame = source.read()
 
             if frame is None:
-                raise Exception(f'Could not read frame from camera ID {camera_id}.')
+                raise Exception(
+                    f'Could not read frame from camera ID {camera_id}.')
             else:
                 streamer.stream(frame)
 
@@ -68,8 +71,8 @@ class RtspDataSource:
         self.__construct_rtsp_url(camera_id)
 
         # Construct the output path
-        output_path = 'media/captures'
-        output_file = f'{output_path}/{camera_id}.mp4'
+        output_path = os.path.join(self.settings.app_temp_dir, 'captures')
+        output_file = os.path.join(output_path, '{camera_id}.mp4')
 
         # Create ouput directory if it does not exist
         if not os.path.exists(output_path):
@@ -119,7 +122,8 @@ class RtspDataSource:
         frame = source.read()
 
         if frame is None:
-            raise Exception(f'Could not read frame from camera ID {camera_id}.')
+            raise Exception(
+                f'Could not read frame from camera ID {camera_id}.')
 
         # Encode the frame
         _, image_array = cv2.imencode('.jpg', frame)
