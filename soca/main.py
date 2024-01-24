@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+import shutil
 from threading import Event
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +16,8 @@ import uvicorn
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    shutil.rmtree(settings().app_temp_dir, ignore_errors=True)
+
     streams: dict[str, StreamCamera] = {}
     stop_events: dict[str, Event] = {}
     if settings().stream_enabled:
@@ -28,6 +31,7 @@ async def lifespan(app: FastAPI):
                 rtsp_repository
             )
             streams[camera_id].start()
+
     yield
     if settings().stream_enabled:
         for camera_id, _ in settings().camera_rtsps.items():
