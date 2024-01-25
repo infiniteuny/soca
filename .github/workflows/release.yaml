@@ -33,6 +33,11 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: type=semver,pattern={{version}}
+          labels: |
+            org.opencontainers.image.title=Soca
+            org.opencontainers.image.description=Soca app image, see https://github.com/infiniteuny/soca for more info.
+            org.opencontainers.image.vendor=INFINITE UNY
+
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5

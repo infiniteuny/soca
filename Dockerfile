@@ -15,10 +15,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 FROM python:3.11-slim-bookworm as runtime
 
-LABEL org.opencontainers.image.url https://www.infiniteuny.id
-LABEL org.opencontainers.image.description Soca app image, see https://github.com/infiniteuny/soca for more info.
-LABEL org.opencontainers.image.source https://github.com/infiniteuny/soca
-
 WORKDIR /app
 
 RUN apt-get update && \
