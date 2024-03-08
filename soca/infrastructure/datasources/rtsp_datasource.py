@@ -19,7 +19,9 @@ class RtspDataSource:
         self.settings = settings
 
     def __construct_rtsp_url(self, camera_id: str) -> None:
-        self.rtsp_url = self.settings.camera_rtsps[camera_id]
+        self.rtsp_url = next(
+            str(camera_rtsp['url']) for camera_rtsp in self.settings.camera_rtsps if camera_rtsp['id'] == camera_id
+        )
 
     def stream(self, camera_id: str) -> None:
         # Construct the RTSP URL

@@ -13,28 +13,53 @@ capture = APIRouter(
 
 @capture.get("/captures")
 def read_all(settings: Annotated[Settings, Depends(settings)]):
-    captures = []
-    for camera_id in settings.camera_rtsps.keys():
-        captures.append({
-            'id': camera_id,
-            'url': f'/api/v1/captures/{camera_id}'
-        })
+    if settings.stream_enabled:
+        captures = []
+        for camera_id in settings.camera_rtsp_stream_ids:
+            captures.append({
+                'id': camera_id,
+                'url': f'/api/v1/captures/{camera_id}'
+            })
 
-    return ORJSONResponse(
-        content={
-            'status': 'success',
-            'data': {
-                'captures': captures
+        return ORJSONResponse(
+            content={
+                'status': 'success',
+                'data': {
+                    'captures': captures
+                }
             }
-        }
-    )
+        )
+    else:
+        return ORJSONResponse(
+            status_code=503,
+            content={
+                'status': 'error',
+                'message': 'Captures require the livestreams to be enabled.'
+            }
+        )
 
 
 @capture.get("/captures/{id}")
 def read(id: str, snashot_camera: Annotated[CaptureCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
         try:
-            if id in settings.camera_rtsps.keys():
+            if id not in settings.camera_rtsp_ids:
+                return ORJSONResponse(
+                    status_code=404,
+                    content={
+                        'status': 'error',
+                        'message': 'Camera not found.'
+                    }
+                )
+            elif id not in settings.camera_rtsp_stream_ids:
+                return ORJSONResponse(
+                    status_code=503,
+                    content={
+                        'status': 'error',
+                        'message': 'Captures require the livestreams to be enabled.'
+                    }
+                )
+            else:
                 video = snashot_camera(id)
 
                 return ORJSONResponse(
@@ -46,14 +71,6 @@ def read(id: str, snashot_camera: Annotated[CaptureCamera, Depends()], settings:
                                 'video': video,
                             }
                         }
-                    }
-                )
-            else:
-                return ORJSONResponse(
-                    status_code=404,
-                    content={
-                        'status': 'error',
-                        'message': 'Camera not found.'
                     }
                 )
         except:

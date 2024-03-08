@@ -15,7 +15,7 @@ livestream = APIRouter(
 def read_all(settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
         livestreams = []
-        for camera_id, _ in settings.camera_rtsps.items():
+        for camera_id in settings.camera_rtsp_stream_ids:
             livestreams.append({
                 'id': camera_id,
                 'url': f'/api/v1/livestreams/{camera_id}/index'
@@ -42,7 +42,23 @@ def read_all(settings: Annotated[Settings, Depends(settings)]):
 @livestream.get("/livestreams/{id}")
 def read(id: str, settings: Annotated[Settings, Depends(settings)]):
     if settings.stream_enabled:
-        if id in settings.camera_rtsps.keys():
+        if id not in settings.camera_rtsp_ids:
+            return ORJSONResponse(
+                status_code=404,
+                content={
+                    'status': 'error',
+                    'message': 'Camera not found.'
+                }
+            )
+        elif id not in settings.camera_rtsp_stream_ids:
+            return ORJSONResponse(
+                status_code=503,
+                content={
+                    'status': 'error',
+                    'message': 'Livestreams disabled.'
+                }
+            )
+        else:
             return ORJSONResponse(
                 content={
                     'status': 'success',
@@ -52,14 +68,6 @@ def read(id: str, settings: Annotated[Settings, Depends(settings)]):
                             'url': f'/api/v1/livestreams/{id}/index'
                         }
                     }
-                }
-            )
-        else:
-            return ORJSONResponse(
-                status_code=404,
-                content={
-                    'status': 'error',
-                    'message': 'Camera not found.'
                 }
             )
     else:

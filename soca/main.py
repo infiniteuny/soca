@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
     streams: dict[str, StreamCamera] = {}
     stop_events: dict[str, Event] = {}
     if settings().stream_enabled:
-        for camera_id, _ in settings().camera_rtsps.items():
+        for camera_id in settings().camera_rtsp_stream_ids:
             rtsp_datasource = RtspDataSource(settings())
             rtsp_repository = RtspRepository(rtsp_datasource)
             stop_events[camera_id] = Event()
@@ -33,10 +33,11 @@ async def lifespan(app: FastAPI):
             streams[camera_id].start()
 
     yield
+
     if settings().stream_enabled:
-        for camera_id, _ in settings().camera_rtsps.items():
+        for camera_id in settings().camera_rtsp_stream_ids:
             stop_events[camera_id].set()
-        for camera_id, _ in settings().camera_rtsps.items():
+        for camera_id in settings().camera_rtsp_stream_ids:
             streams[camera_id].join()
 
 # Core application instance

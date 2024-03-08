@@ -14,7 +14,7 @@ snapshot = APIRouter(
 @snapshot.get("/snapshots")
 def read_all(settings: Annotated[Settings, Depends(settings)]):
     snapshots = []
-    for camera_id in settings.camera_rtsps.keys():
+    for camera_id in settings.camera_rtsp_ids:
         snapshots.append({
             'id': camera_id,
             'url': f'/api/v1/snapshots/{camera_id}'
@@ -33,7 +33,7 @@ def read_all(settings: Annotated[Settings, Depends(settings)]):
 @snapshot.get("/snapshots/{id}")
 def read(id: str, snashot_camera: Annotated[SnapshotCamera, Depends()], settings: Annotated[Settings, Depends(settings)]):
     try:
-        if id in settings.camera_rtsps.keys():
+        if id in settings.camera_rtsp_ids:
             image = snashot_camera(id)
 
             return ORJSONResponse(
