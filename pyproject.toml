@@ -7,14 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.11.7"
-fastapi = "0.109.1"
-uvicorn = { extras = ["standard"], version = "0.26.0" }
-pydantic-settings = "2.1.0"
+fastapi = "0.110.0"
+uvicorn = { extras = ["standard"], version = "0.27.1" }
+pydantic-settings = "2.2.1"
 opencv-python = "^4.8.1.78"
 vidgear = "0.3.2"
 yt-dlp = "2023.12.30"
 orjson = "3.9.15"
-python-dotenv = "1.0.0"
+python-dotenv = "1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
