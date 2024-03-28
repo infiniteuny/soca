@@ -607,7 +607,7 @@ files = [
 ]
 
 [package.dependencies]
-numpy = {version = ">=1.23.5", markers = "python_version >= \"3.11\""}
+numpy = {version = ">=1.26.0", markers = "python_version >= \"3.12\""}
 
 [[package]]
 name = "orjson"
@@ -1302,5 +1302,5 @@ websockets = ">=12.0"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "3.11.7"
-content-hash = "753844498774ee14b850403c60d8099d25aaec77824c286042e302ba35d8dd12"
+python-versions = "3.12.2"
+content-hash = "d658f4d6ed8949d7efb9abf61b373b79e4d6690fdff93a83c524046911694cae"
