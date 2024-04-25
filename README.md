@@ -51,4 +51,4 @@ You can start editing the app by modifying files inside the `soca` folder. The a
 
 To learn more about FastAPI, take a look at the following resources:
 
-- [FastAPI Documentation](https://fastapi.tiangolo.com/) - learn about Next.js features and API.
+- [FastAPI Documentation](https://fastapi.tiangolo.com/) - learn about FastAPI features.
