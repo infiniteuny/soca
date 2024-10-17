@@ -1,4 +1,4 @@
-FROM python:3.11.7-bookworm as builder
+FROM python:3.12.6-bookworm as builder
 
 WORKDIR /tmp
 
@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install poetry && \
     poetry install --no-ansi --no-interaction --no-root
 
-FROM python:3.11.7-slim-bookworm as runtime
+FROM python:3.12.6-slim-bookworm as runtime
 
 WORKDIR /app
 
