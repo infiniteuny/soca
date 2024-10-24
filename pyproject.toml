@@ -6,14 +6,14 @@ authors = ["Muhammad Naufal <me@falkia34.dev>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.7"
-fastapi = "0.110.1"
-uvicorn = { extras = ["standard"], version = "0.29.0" }
-pydantic-settings = "2.2.1"
+python = "3.13.0"
+fastapi = "0.115.2"
+uvicorn = { extras = ["standard"], version = "0.32.0" }
+pydantic-settings = "2.6.0"
 opencv-python = "^4.8.1.78"
-vidgear = "0.3.2"
+vidgear = "0.3.3"
 yt-dlp = "2024.4.9"
-orjson = "3.10.1"
+orjson = "3.10.7"
 python-dotenv = "1.0.1"
 
 [build-system]
