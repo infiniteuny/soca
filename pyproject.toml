@@ -9,7 +9,7 @@ readme = "README.md"
 python = "3.13.2"
 fastapi = "0.115.8"
 uvicorn = { extras = ["standard"], version = "0.34.0" }
-pydantic-settings = "2.7.1"
+pydantic-settings = "2.8.0"
 opencv-python = "^4.8.1.78"
 vidgear = "0.3.3"
 yt-dlp = "2024.12.23"
