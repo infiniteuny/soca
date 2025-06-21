@@ -6,7 +6,7 @@ authors = ["Muhammad Naufal <me@falkia34.dev>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.13.4"
+python = "3.13.5"
 fastapi = "0.115.12"
 uvicorn = { extras = ["standard"], version = "0.34.3" }
 pydantic-settings = "2.9.1"

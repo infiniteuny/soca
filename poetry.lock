@@ -1176,5 +1176,5 @@ test = ["pytest (>=8.1,<9.0)", "pytest-rerunfailures (>=14.0,<15.0)"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = "3.13.4"
-content-hash = "1b1c7acfe6ceb5ddd66eec6048cf086b4777c4f2783620932be8602b7d147e2b"
+python-versions = "3.13.5"
+content-hash = "97570a10a5219ea3b1e5a16aa4ac47616bd0bb91ff98c113aee0559d1a45d971"
