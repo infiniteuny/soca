@@ -6,8 +6,8 @@ authors = ["Muhammad Naufal <me@falkia34.dev>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.13.7"
-fastapi = "0.118.0"
+python = "3.14.0"
+fastapi = "0.118.3"
 uvicorn = { extras = ["standard"], version = "0.37.0" }
 pydantic-settings = "2.11.0"
 opencv-python = "^4.8.1.78"
