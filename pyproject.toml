@@ -7,13 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.14.0"
-fastapi = "0.119.0"
+fastapi = "0.120.0"
 uvicorn = { extras = ["standard"], version = "0.38.0" }
 pydantic-settings = "2.11.0"
 opencv-python = "^4.8.1.78"
 vidgear = "0.3.3"
 yt-dlp = "2024.12.23"
-orjson = "3.11.3"
+orjson = "3.11.4"
 python-dotenv = "1.1.1"
 
 [build-system]
