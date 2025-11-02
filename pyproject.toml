@@ -14,7 +14,7 @@ opencv-python = "^4.8.1.78"
 vidgear = "0.3.3"
 yt-dlp = "2024.12.23"
 orjson = "3.11.4"
-python-dotenv = "1.1.1"
+python-dotenv = "1.2.1"
 
 [build-system]
 requires = ["poetry-core"]
