@@ -265,13 +265,13 @@ files = [
 
 [[package]]
 name = "fastapi"
-version = "0.121.1"
+version = "0.121.2"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fastapi-0.121.1-py3-none-any.whl", hash = "sha256:2c5c7028bc3a58d8f5f09aecd3fd88a000ccc0c5ad627693264181a3c33aa1fc"},
-    {file = "fastapi-0.121.1.tar.gz", hash = "sha256:b6dba0538fd15dab6fe4d3e5493c3957d8a9e1e9257f56446b5859af66f32441"},
+    {file = "fastapi-0.121.2-py3-none-any.whl", hash = "sha256:f2d80b49a86a846b70cc3a03eb5ea6ad2939298bf6a7fe377aa9cd3dd079d358"},
+    {file = "fastapi-0.121.2.tar.gz", hash = "sha256:ca8e932b2b823ec1721c641e3669472c855ad9564a2854c9899d904c2848b8b9"},
 ]
 
 [package.dependencies]
@@ -561,6 +561,17 @@ files = [
 ]
 
 [[package]]
+name = "packaging"
+version = "25.0"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"},
+    {file = "packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"},
+]
+
+[[package]]
 name = "pydantic"
 version = "2.12.4"
 description = "Data validation using Python type hints"
@@ -716,13 +727,13 @@ typing-extensions = ">=4.14.1"
 
 [[package]]
 name = "pydantic-settings"
-version = "2.11.0"
+version = "2.12.0"
 description = "Settings management using Pydantic"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 files = [
-    {file = "pydantic_settings-2.11.0-py3-none-any.whl", hash = "sha256:fe2cea3413b9530d10f3a5875adffb17ada5c1e1bab0b2885546d7310415207c"},
-    {file = "pydantic_settings-2.11.0.tar.gz", hash = "sha256:d0e87a1c7d33593beb7194adb8470fc426e95ba02af83a0f23474a04c9a08180"},
+    {file = "pydantic_settings-2.12.0-py3-none-any.whl", hash = "sha256:fddb9fd99a5b18da837b29710391e945b1e30c135477f484084ee513adb93809"},
+    {file = "pydantic_settings-2.12.0.tar.gz", hash = "sha256:005538ef951e3c2a68e1c08b292b5f2e71490def8589d4221b95dab00dafcfd0"},
 ]
 
 [package.dependencies]
@@ -1035,25 +1046,26 @@ test = ["aiohttp (>=3.10.5)", "flake8 (>=6.1,<7.0)", "mypy (>=0.800)", "psutil",
 
 [[package]]
 name = "vidgear"
-version = "0.3.3"
+version = "0.3.4"
 description = "High-performance cross-platform Video Processing Python framework powerpacked with unique trailblazing features."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.10"
 files = [
-    {file = "vidgear-0.3.3-py3-none-any.whl", hash = "sha256:b5939b23b67bc1af6b21a78f58b771917b75f51b18207b75911a998a614208b1"},
-    {file = "vidgear-0.3.3.tar.gz", hash = "sha256:4f25c74d6e65a54e26d12fb518423432ed16950fc081665896fc6640ec12f24e"},
+    {file = "vidgear-0.3.4-py3-none-any.whl", hash = "sha256:4d04bc9b122da6afddc00cf69b3f9215e1ba3643e911365d2adfa79e69b85450"},
+    {file = "vidgear-0.3.4.tar.gz", hash = "sha256:2c4d597f66be6308dcdc7b5797d6c3f772dd03f33b3bf9f92dea3623c1fd6115"},
 ]
 
 [package.dependencies]
 colorlog = "*"
 cython = "*"
 numpy = "*"
+packaging = "*"
 requests = "*"
 tqdm = "*"
 
 [package.extras]
-asyncio = ["Pillow", "aiortc (>=1.9.0)", "jinja2", "msgpack (>=1.1.0rc1)", "msgpack-numpy (>=0.4.8)", "mss (>=9.0.1)", "pyscreenshot (>=3.1)", "pyzmq (>=26.0.3)", "simplejpeg (>=1.7.3)", "starlette (>=0.37.2)", "uvicorn (>=0.30.1)", "yt-dlp (>=2024.6.21.232706.dev0)"]
-core = ["Pillow", "mss (>=9.0.1)", "pyscreenshot (>=3.1)", "pyzmq (>=26.0.3)", "simplejpeg (>=1.7.3)", "yt-dlp (>=2024.6.21.232706.dev0)"]
+asyncio = ["Pillow", "aiortc (>=1.14.0)", "jinja2", "msgpack (>=1.1.2)", "msgpack_numpy (>=0.4.8)", "mss (>=10.1.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "starlette (>=0.50.0)", "uvicorn (>=0.38.0)", "yt-dlp[default] (>=2025.11.12.5349.dev0)"]
+core = ["Pillow", "mss (>=10.1.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "yt-dlp[default] (>=2025.11.12.5349.dev0)"]
 
 [[package]]
 name = "watchfiles"
@@ -1278,4 +1290,4 @@ test = ["pytest (>=8.1,<9.0)", "pytest-rerunfailures (>=14.0,<15.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.14.0"
-content-hash = "44ac0122024fde0490a365f94053f76ef306dc7656ea901fa8c710bbb5bf8cc7"
+content-hash = "864323f362e3d205d852baaf2910b31a51a757688cbf0322056920e3e501fb5a"
