@@ -7,8 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.14.2"
-fastapi = "0.126.0"
-uvicorn = { extras = ["standard"], version = "0.38.0" }
+fastapi = "0.127.0"
+uvicorn = { extras = ["standard"], version = "0.40.0" }
 pydantic-settings = "2.12.0"
 opencv-python = "^4.8.1.78"
 vidgear = "0.3.4"
