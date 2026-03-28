@@ -12,7 +12,7 @@ uvicorn = { extras = ["standard"], version = "0.42.0" }
 pydantic-settings = "2.13.1"
 opencv-python = "^4.8.1.78"
 vidgear = "0.3.4"
-yt-dlp = "2024.12.23"
+yt-dlp = "2026.3.17"
 orjson = "3.11.7"
 python-dotenv = "1.2.2"
 
