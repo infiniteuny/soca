@@ -1034,13 +1034,13 @@ test = ["aiohttp (>=3.10.5)", "flake8 (>=6.1,<7.0)", "mypy (>=0.800)", "psutil",
 
 [[package]]
 name = "vidgear"
-version = "0.3.4"
+version = "0.3.5"
 description = "High-performance cross-platform Video Processing Python framework powerpacked with unique trailblazing features."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "vidgear-0.3.4-py3-none-any.whl", hash = "sha256:4d04bc9b122da6afddc00cf69b3f9215e1ba3643e911365d2adfa79e69b85450"},
-    {file = "vidgear-0.3.4.tar.gz", hash = "sha256:2c4d597f66be6308dcdc7b5797d6c3f772dd03f33b3bf9f92dea3623c1fd6115"},
+    {file = "vidgear-0.3.5-py3-none-any.whl", hash = "sha256:9293f7436f6091350bf58415afcfd60e6dc9acb3bf5f34148db93b295ef90d35"},
+    {file = "vidgear-0.3.5.tar.gz", hash = "sha256:9a1e3cc85c997757619b948204a2264560ac44c7d0aac2a711919fbf76a53213"},
 ]
 
 [package.dependencies]
@@ -1052,8 +1052,8 @@ requests = "*"
 tqdm = "*"
 
 [package.extras]
-asyncio = ["Pillow", "aiortc (>=1.14.0)", "jinja2", "msgpack (>=1.1.2)", "msgpack_numpy (>=0.4.8)", "mss (>=10.1.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "starlette (>=0.50.0)", "uvicorn (>=0.38.0)", "yt-dlp[default] (>=2025.11.12.5349.dev0)"]
-core = ["Pillow", "mss (>=10.1.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "yt-dlp[default] (>=2025.11.12.5349.dev0)"]
+asyncio = ["Pillow", "aiortc (>=1.14.0)", "deffcode (>=0.2.7)", "dxcam (>=0.0.5)", "jinja2", "msgpack (>=1.1.2)", "msgpack_numpy (>=0.4.8)", "mss (>=10.2.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "starlette (>=1.0.0)", "uvicorn (>=0.46.0)", "uvloop (>=0.22.1)", "yt-dlp[default] (>=2026.4.10.235301.dev0)"]
+core = ["Pillow", "deffcode (>=0.2.7)", "dxcam (>=0.0.5)", "mss (>=10.2.0)", "pyscreenshot (>=3.1)", "pyzmq (>=27.1.0)", "simplejpeg (>=1.9.0)", "yt-dlp[default] (>=2026.4.10.235301.dev0)"]
 
 [[package]]
 name = "watchfiles"
@@ -1278,4 +1278,4 @@ test = ["pytest (>=8.1,<9.0)", "pytest-rerunfailures (>=14.0,<15.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.14.5"
-content-hash = "bb493cf22e392e0089c2d520c467148c76d8537b5406b92000eba1a7384fd999"
+content-hash = "e20aadecb7bd68f4c4fbd60fcd9e021f6d39bf3d6e2b43b6f5ee1c7744301fcb"
