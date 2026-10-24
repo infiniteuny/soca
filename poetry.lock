@@ -265,13 +265,13 @@ files = [
 
 [[package]]
 name = "fastapi"
-version = "0.143.0"
+version = "0.143.3"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "fastapi-0.143.0-py3-none-any.whl", hash = "sha256:3e9395fd35276425b61b516a31fdd7c77fe2af83e41b4da22e30696fb1304c5d"},
-    {file = "fastapi-0.143.0.tar.gz", hash = "sha256:1acffe48206a80917cf7dac21992b5c44b25384e8902bf745c1fd9dabcf6c51f"},
+    {file = "fastapi-0.143.3-py3-none-any.whl", hash = "sha256:75e8bd68e2f52f77d29b2879749c257d64de2d85282d25270caf2bfccce5efe5"},
+    {file = "fastapi-0.143.3.tar.gz", hash = "sha256:b9ab567ee57afb4454004ce04c889f8f0160ac47946b99795887cd6e88484848"},
 ]
 
 [package.dependencies]
@@ -723,25 +723,26 @@ typing-extensions = ">=4.14.1"
 
 [[package]]
 name = "pydantic-settings"
-version = "2.15.0"
+version = "2.16.0"
 description = "Settings management using Pydantic"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 files = [
-    {file = "pydantic_settings-2.15.0-py3-none-any.whl", hash = "sha256:0ba092c291c94baceb5eff768aa0d56400a457585bc0175925a5a5510303da42"},
-    {file = "pydantic_settings-2.15.0.tar.gz", hash = "sha256:694b793e84f766ba76a90ebdefc01d0a9a045dab0382bee70393da93712ad117"},
+    {file = "pydantic_settings-2.16.0-py3-none-any.whl", hash = "sha256:7e73acf7f61936a15e5a3b6eedaea29f133357faf7272f2607ba479b049dd7f2"},
+    {file = "pydantic_settings-2.16.0.tar.gz", hash = "sha256:5b6c578049ede4db0e2ef3b4eaa4ad4069cfa9211f83fb38df899dfade50a614"},
 ]
 
 [package.dependencies]
 pydantic = ">=2.7.0"
-python-dotenv = ">=0.21.0"
+python-dotenv = ">=1.2.2"
+typing-extensions = ">=4.0.0"
 typing-inspection = ">=0.4.0"
 
 [package.extras]
 aws-secrets-manager = ["boto3 (>=1.35.0)"]
+aws-systems-manager = ["boto3 (>=1.35.0)"]
 azure-key-vault = ["azure-identity (>=1.16.0)", "azure-keyvault-secrets (>=4.8.0)"]
 gcp-secret-manager = ["google-cloud-secret-manager (>=2.23.1)"]
-toml = ["tomli (>=2.0.1)"]
 yaml = ["pyyaml (>=6.0.1)"]
 
 [[package]]
@@ -1284,5 +1285,5 @@ test = ["pytest (>=8.1,<9.0)", "pytest-rerunfailures (>=14.0,<15.0)"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = "3.14.8"
-content-hash = "5f8b5ae82e11910c86119b54e5727c621a06e59bfd44af3181bff7f0e794de38"
+python-versions = "3.15.0"
+content-hash = "7b6caad58b29b52cbab74d139f633cf01bca68c2d0f25dc8e0998d1067747c27"
